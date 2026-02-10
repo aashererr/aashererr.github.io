@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Ranchers&display=swap');
+
+body {
+  background-color: #f2f3f3;
+  font-family: "Ranchers", cursive;
+}
+
+/****************   Nav Section **********************/
+nav {
+  display: flex;
+	align-items: center;
+	gap: 1rem;
+  justify-content: space-between;
+	padding: 0.75rem 1rem;
+	/* Full border around the header bar */
+	border: 3px solid #00b87e;
+  background-color: #ffffff;
+  /* Sticky, centered header bar */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* Make the header bar less wide and centered */
+  width: min(600px, 100% - 2rem);
+  margin-inline: auto;
+  border-radius: 12px;
+  overflow: hidden; /* ensure rounded corners render cleanly */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+nav p {
+  margin: 0;
+}
+
+/*********** Name Left, Contact Link Right ***********/
+nav p:last-child {
+  margin-left: auto;
+}
+
+/***********************  Nav Links   **************************/
+nav a {
+  color: #088471;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/***********************  Footer Section   **************************/
+footer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem 1rem;
+  border-top: 1px solid #00b87e;
+  background-color: #d8d8dc;
+}
+
+footer p {
+  margin: 0;
+}
+
+footer a {
+  color: #088471;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/*********** Splash Page ************************/
+header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-family: "Ranchers", cursive;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2.5rem;
+  color: #13012b;
+}
+
+header img {
+  width: 270px;
+  height: auto;
+  border: 2px solid #000604;
+  border-radius: 8px;
+}
+
+.address {
+  color: #13012b;
+}
+
+.tagline {
+  color: #13012b;
+  
+}
+
+/************* Sections ********************/
+hr {
+
+}
+
+section h3 {
+  font-family: "Ranchers", cursive;
+  font-weight: 600;
+  font-style: normal;
+  color: #13012b;
+}
+
+section dl {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  column-gap: 1rem;
+  row-gap: 0.25rem;
+  margin: 0.5rem 0 1rem;
+}
+
+section dt {
+  grid-column: 1;
+  font-weight: 600;
+  margin: 0;
+}
+
+section dd {
+  grid-column: 2;
+  margin: 0 0 0.25rem 0;
+} 
+
+/* Right-align values in Education and Leadership boxes */
+#education.box dd,
+#leadership_and_experience.box dd {
+  text-align: right;
+}
+
+section ul {
+  color: #13012b;
+
+}
+
+section a {
+  color: #1e24e6;
+  text-decoration: none;
+
+}
+
+section a:visited {
+  color: #f4ec79;
+
+}
+
+section a:hover {
+  text-decoration: underline;
+}
+
+
+/* Overview grid: Profile (larger) + Skills */
+#overview.overview-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  width: min(1000px, 100% - 2rem);
+  margin-inline: auto;
+  margin-block: 1.5rem;
+}
+
+.box {
+  border: 2px solid #00b87e;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background-color: #ffffff;
+}
+
+/* Info grid: Education + Leadership */
+#info.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: min(1100px, 100% - 2rem);
+  margin-inline: auto;
+  margin-block: 1.5rem;
+}
+
+/* Projects section box: larger container */
+.projects-box {
+  width: min(1200px, 100% - 2rem);
+  margin-inline: auto;
+  margin-block: 1.5rem;
+}
+
+
+/**************   Projects   *****************/
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;  
+  align-items: start;
+	
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  
+}
+
+.card {
+  
+}
+
+/**************   Responsiveness   *****************/
+@media (max-width: 680px) {
+    nav {
+      flex-direction: column;
+      align-items: flex-start;
+      row-gap: 0.5rem;
+      padding: 0.75rem 1rem;
+    } 
+
+
+
+    .three-col {
+      grid-template-columns: 1fr;
+    } 
+
+    #overview.overview-grid {
+      grid-template-columns: 1fr;
+      width: 100%;
+      margin-inline: 0;
+      gap: 1rem;
+    }
+
+    #info.info-grid {
+      grid-template-columns: 1fr;
+      width: 100%;
+      margin-inline: 0;
+      gap: 1rem;
+    }
+
+    .projects-box {
+      width: 100%;
+      margin-inline: 0;
+      gap: 1rem;
+    }
+}
+
+
+/**************   Contact Page   *****************/
+.one-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  
+}
+
+input {
+  color: #13012b;
+
+}
+
+textarea {
+  color: #13012b;
+   
+}
+
+/* Ensure form controls use the site font */
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+}
