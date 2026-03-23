@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Admin — Aaron David Sherer</title>
+    <script src="https://kit.fontawesome.com/b601c5ae13.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+
+    <!-- Navigation (no admin link — keeps this page unlisted) -->
+    <nav>
+      <p><a href="index.html" style="text-decoration:none; color:inherit;">Aaron David Sherer</a></p>
+      <p>
+        <a href="projects.html">Projects</a>
+        &nbsp;&bull;&nbsp;
+        <a href="about.html">About</a>
+        &nbsp;&bull;&nbsp;
+        <a href="https://github.com/aashererr" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <i class="fa-brands fa-github" aria-hidden="true"></i>
+        </a>
+      </p>
+    </nav>
+
+    <!-- Password Gate -->
+    <div id="gate" class="admin-gate box">
+      <h2>
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        &nbsp;Private Access
+      </h2>
+      <p style="color: var(--text); margin-bottom: 1.5rem;">This page is not publicly listed. Enter your password to continue.</p>
+      <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password" />
+      <button onclick="checkPassword()">Enter</button>
+      <p id="pw-error" class="admin-error">Incorrect password. Try again.</p>
+    </div>
+
+    <!-- Protected Content — hidden until correct password entered -->
+    <div id="protected" class="admin-content page-content">
+
+      <div class="box" style="margin-bottom: 2rem;">
+        <h1>
+          <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+          &nbsp;Admin Panel
+        </h1>
+        <p>Welcome back. This page is only accessible to you — it's not linked anywhere on the public site.</p>
+        <button onclick="logout()" style="
+          margin-top: 1rem;
+          background: transparent;
+          border: 2px solid var(--border);
+          color: var(--border);
+          border-radius: 6px;
+          padding: 0.4rem 1.2rem;
+          cursor: pointer;
+          font-family: inherit;
+          font-weight: 600;
+        ">Log out</button>
+      </div>
+
+      <!-- ── Add your private content below ── -->
+
+      <div class="info-grid">
+
+        <div class="box">
+          <h2>Notes &amp; Drafts</h2>
+          <p>Use this section for draft blog posts, ideas, or private notes. Edit <code>admin.html</code> to add content here.</p>
+          <ul>
+            <li>Draft: "My internship search process"</li>
+            <li>Idea: write-up on Pong physics implementation</li>
+            <li>Todo: update projects page with GitHub links</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h2>Quick Links</h2>
+          <ul>
+            <li><a href="https://github.com/aashererr" target="_blank" rel="noopener noreferrer">GitHub Profile</a></li>
+            <li><a href="https://www.linkedin.com/in/aaron-sherer-ashare" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="contact.html">Contact Page</a></li>
+            <li><a href="index.html">Blog Home</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- ── End private content ── -->
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        &copy; <a href="index.html">Aaron Sherer</a>
+        &nbsp;&bull;&nbsp;
+        <a href="https://github.com/aashererr" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+          <i class="fa-brands fa-github fa-spin-pulse" aria-hidden="true"></i>
+          <span class="sr-only">GitHub</span>
+        </a>
+      </p>
+    </footer>
+
+    <script>
+      /**
+       * Client-side password protection using SHA-256 (Web Crypto API).
+       *
+       * HOW TO SET YOUR PASSWORD:
+       *   1. Open your browser's developer console (F12 → Console tab).
+       *   2. Run this snippet, replacing "yourPassword" with what you want:
+       *
+       *        crypto.subtle.digest('SHA-256', new TextEncoder().encode('yourPassword'))
+       *          .then(b => console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')));
+       *
+       *   3. Copy the printed hash and replace the value of ADMIN_HASH below.
+       *   4. Save the file. Done.
+       *
+       * Default password is: admin
+       * (SHA-256 of "admin")
+       * Change it before you rely on this page being private.
+       *
+       * ⚠️  SECURITY NOTE:
+       * This is client-side only — it keeps casual visitors out but is NOT
+       * cryptographically airtight for a determined attacker who views source.
+       * For true security, host with server-side auth (Netlify password
+       * protection, Cloudflare Access, etc.). For a personal portfolio this
+       * level of protection is usually more than sufficient.
+       */
+      const ADMIN_HASH = '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918';
+
+      async function sha256(str) {
+        const buf   = new TextEncoder().encode(str);
+        const hash  = await crypto.subtle.digest('SHA-256', buf);
+        return [...new Uint8Array(hash)].map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      async function checkPassword() {
+        const val = document.getElementById('pw-input').value;
+        const h   = await sha256(val);
+        if (h === ADMIN_HASH) {
+          sessionStorage.setItem('admin_auth', '1');
+          showContent();
+        } else {
+          const err = document.getElementById('pw-error');
+          err.style.display = 'block';
+          document.getElementById('pw-input').value = '';
+          document.getElementById('pw-input').focus();
+        }
+      }
+
+      function showContent() {
+        document.getElementById('gate').style.display      = 'none';
+        document.getElementById('protected').style.display = 'block';
+      }
+
+      function logout() {
+        sessionStorage.removeItem('admin_auth');
+        document.getElementById('protected').style.display = 'none';
+        document.getElementById('gate').style.display      = 'block';
+        document.getElementById('pw-input').value = '';
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Stay logged in for the current browser session
+        if (sessionStorage.getItem('admin_auth') === '1') showContent();
+
+        // Allow Enter key in the password field
+        document.getElementById('pw-input').addEventListener('keydown', e => {
+          if (e.key === 'Enter') checkPassword();
+        });
+      });
+    </script>
+  </body>
+</html>

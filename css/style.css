@@ -1,44 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Ranchers&display=swap');
 
+:root {
+  --bg: #f2f3f3;
+  --surface: #ffffff;
+  --border: #00b87e;
+  --text: #13012b;
+  --text-heading: #13012b;
+  --link: #1e24e6;
+  --link-visited: #9b1cbf;
+  --footer-bg: #d8d8dc;
+}
+
 body {
-  background-color: #f2f3f3;
+  background-color: var(--bg);
   font-family: "Ranchers", cursive;
+  color: var(--text);
 }
 
 /****************   Nav Section **********************/
 nav {
   display: flex;
-	align-items: center;
-	gap: 1rem;
+  align-items: center;
+  gap: 1rem;
   justify-content: space-between;
-	padding: 0.75rem 1rem;
-	/* Full border around the header bar */
-	border: 3px solid #00b87e;
-  background-color: #ffffff;
-  /* Sticky, centered header bar */
+  padding: 1.25rem 2rem;
+  border: 3px solid var(--border);
+  background-color: var(--surface);
   position: sticky;
   top: 0;
   z-index: 1000;
-  /* Make the header bar less wide and centered */
-  width: min(600px, 100% - 2rem);
+  width: min(1100px, 100% - 2rem);
   margin-inline: auto;
   border-radius: 12px;
-  overflow: hidden; /* ensure rounded corners render cleanly */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 nav p {
   margin: 0;
+  color: var(--text-heading);
 }
 
-/*********** Name Left, Contact Link Right ***********/
+/*********** Name Left, Links Right ***********/
 nav p:last-child {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
 }
 
 /***********************  Nav Links   **************************/
 nav a {
-  color: #088471;
+  color: var(--border);
   text-decoration: none;
   font-weight: 600;
 }
@@ -52,9 +65,10 @@ footer {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  padding: 1rem 1rem;
-  border-top: 1px solid #00b87e;
-  background-color: #d8d8dc;
+  padding: 1.25rem 1rem;
+  border-top: 1px solid var(--border);
+  background-color: var(--footer-bg);
+  color: var(--text);
 }
 
 footer p {
@@ -62,7 +76,7 @@ footer p {
 }
 
 footer a {
-  color: #088471;
+  color: var(--border);
   text-decoration: none;
   font-weight: 600;
 }
@@ -76,6 +90,7 @@ header {
   display: flex;
   gap: 2rem;
   margin-bottom: 1rem;
+  align-items: flex-start;
 }
 
 header h1 {
@@ -83,35 +98,39 @@ header h1 {
   font-weight: 600;
   font-style: normal;
   font-size: 2.5rem;
-  color: #13012b;
+  color: var(--text-heading);
 }
 
 header img {
   width: 270px;
   height: auto;
-  border: 2px solid #000604;
+  border: 2px solid var(--border);
   border-radius: 8px;
 }
 
 .address {
-  color: #13012b;
+  color: var(--text);
 }
 
 .tagline {
-  color: #13012b;
-  
+  color: var(--text);
 }
 
 /************* Sections ********************/
 hr {
+  border-color: var(--border);
+  opacity: 0.2;
+}
 
+section h2 {
+  color: var(--text-heading);
 }
 
 section h3 {
   font-family: "Ranchers", cursive;
   font-weight: 600;
   font-style: normal;
-  color: #13012b;
+  color: var(--text-heading);
 }
 
 section dl {
@@ -126,12 +145,14 @@ section dt {
   grid-column: 1;
   font-weight: 600;
   margin: 0;
+  color: var(--text);
 }
 
 section dd {
   grid-column: 2;
   margin: 0 0 0.25rem 0;
-} 
+  color: var(--text);
+}
 
 /* Right-align values in Education and Leadership boxes */
 #education.box dd,
@@ -140,41 +161,37 @@ section dd {
 }
 
 section ul {
-  color: #13012b;
-
+  color: var(--text);
 }
 
 section a {
-  color: #1e24e6;
+  color: var(--link);
   text-decoration: none;
-
 }
 
 section a:visited {
-  color: #f4ec79;
-
+  color: var(--link-visited);
 }
 
 section a:hover {
   text-decoration: underline;
 }
 
-
 /* Overview grid: Profile (larger) + Skills */
 #overview.overview-grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  width: min(1000px, 100% - 2rem);
+  width: min(1100px, 100% - 2rem);
   margin-inline: auto;
   margin-block: 1.5rem;
 }
 
 .box {
-  border: 2px solid #00b87e;
+  border: 2px solid var(--border);
   border-radius: 12px;
   padding: 1.5rem;
-  background-color: #ffffff;
+  background-color: var(--surface);
 }
 
 /* Info grid: Education + Leadership */
@@ -194,79 +211,120 @@ section a:hover {
   margin-block: 1.5rem;
 }
 
-
 /**************   Projects   *****************/
 .three-col {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;  
+  gap: 2rem;
   align-items: start;
-	
 }
 
 .card img {
   width: 100%;
   height: auto;
-  
+  border-radius: 8px;
+  border: 1px solid var(--border);
 }
 
-.card {
-  
+.card dt {
+  color: var(--text-heading);
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.card ul {
+  color: var(--text);
 }
 
 /**************   Responsiveness   *****************/
 @media (max-width: 680px) {
-    nav {
-      flex-direction: column;
-      align-items: flex-start;
-      row-gap: 0.5rem;
-      padding: 0.75rem 1rem;
-    } 
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 0.5rem;
+    padding: 0.75rem 1rem;
+  }
 
+  nav p:last-child {
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
 
+  .three-col {
+    grid-template-columns: 1fr;
+  }
 
-    .three-col {
-      grid-template-columns: 1fr;
-    } 
+  #overview.overview-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin-inline: 0;
+    gap: 1rem;
+  }
 
-    #overview.overview-grid {
-      grid-template-columns: 1fr;
-      width: 100%;
-      margin-inline: 0;
-      gap: 1rem;
-    }
+  #info.info-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin-inline: 0;
+    gap: 1rem;
+  }
 
-    #info.info-grid {
-      grid-template-columns: 1fr;
-      width: 100%;
-      margin-inline: 0;
-      gap: 1rem;
-    }
+  .projects-box {
+    width: 100%;
+    margin-inline: 0;
+    gap: 1rem;
+  }
 
-    .projects-box {
-      width: 100%;
-      margin-inline: 0;
-      gap: 1rem;
-    }
+  header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header img {
+    width: 200px;
+  }
 }
-
 
 /**************   Contact Page   *****************/
 .one-col {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  
+  width: min(700px, 100% - 2rem);
+  margin-inline: auto;
+  margin-block: 1.5rem;
 }
 
-input {
-  color: #13012b;
-
+.one-col label {
+  color: var(--text-heading);
+  display: block;
+  margin-bottom: 0.25rem;
 }
 
+input,
 textarea {
-  color: #13012b;
-   
+  color: var(--text);
+  background-color: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  background-color: var(--border);
+  color: #0f1117;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.75rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+button[type="submit"]:hover {
+  background-color: #00a070;
 }
 
 /* Ensure form controls use the site font */
@@ -275,4 +333,216 @@ textarea,
 button,
 select {
   font-family: inherit;
+}
+
+/**************   Standalone page content wrapper   *****************/
+.page-content {
+  width: min(1100px, 100% - 2rem);
+  margin-inline: auto;
+  margin-block: 1.5rem;
+}
+
+.page-content h1 {
+  color: var(--text-heading);
+  font-size: 2.5rem;
+}
+
+.page-content h2 {
+  color: var(--text-heading);
+}
+
+.page-content p {
+  color: var(--text);
+}
+
+/**************   Blog Homepage   *****************/
+.blog-hero {
+  margin-top: 2rem;
+}
+
+.blog-hero-inner {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.blog-hero-text {
+  flex: 1;
+}
+
+.blog-hero-text h1 {
+  font-size: 3rem;
+  color: var(--text-heading);
+  margin: 0 0 0.5rem;
+}
+
+.blog-hero-text .tagline {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+}
+
+.blog-hero-img {
+  width: 200px;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Headshot wrapper — ElectricBorder targets this */
+.headshot-wrap {
+  display: inline-block;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.headshot-img {
+  width: 180px;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.hero-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 0.6rem 1.5rem;
+  background-color: var(--border);
+  color: #fff !important;
+  border-radius: 8px;
+  text-decoration: none !important;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.hero-btn:hover {
+  opacity: 0.85;
+  text-decoration: none !important;
+}
+
+.hero-btn-outline {
+  background-color: transparent;
+  border: 2px solid var(--border);
+  color: var(--border) !important;
+}
+
+.blog-posts-section {
+  margin-top: 3rem;
+}
+
+.blog-posts-section > h2 {
+  color: var(--text-heading);
+  font-size: 1.8rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.post-card h3 {
+  color: var(--text-heading);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.post-card > p {
+  color: var(--text);
+  margin: 0;
+}
+
+.post-card > a {
+  color: var(--border);
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: auto;
+}
+
+.post-card > a:hover {
+  text-decoration: underline;
+}
+
+.post-date {
+  color: #888 !important;
+  font-size: 0.9rem;
+}
+
+.post-tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background-color: var(--border);
+  color: #fff;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+/**************   Admin / Secure Page   *****************/
+.admin-gate {
+  width: min(420px, 100% - 2rem);
+  margin-inline: auto;
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.admin-gate h2 {
+  color: var(--text-heading);
+  margin-bottom: 0.5rem;
+}
+
+.admin-gate input {
+  display: block;
+  width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.admin-gate button {
+  padding: 0.6rem 2.5rem;
+  font-size: 1rem;
+}
+
+.admin-error {
+  color: #e05252;
+  margin-top: 0.75rem;
+  display: none;
+}
+
+.admin-content {
+  display: none;
+}
+
+/**************   Responsive — blog additions   *****************/
+@media (max-width: 680px) {
+  .blog-hero-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-links {
+    justify-content: center;
+  }
+
+  .posts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-hero-text h1 {
+    font-size: 2.2rem;
+  }
 }
